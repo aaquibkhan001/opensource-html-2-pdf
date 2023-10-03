@@ -1,12 +1,7 @@
 # Introduction
 
-This library acts as an intermediary service which handles the Strong CopyLeft clauses of AGPL 3.0 license 
-while using the library
-https://mvnrepository.com/artifact/com.itextpdf/html2pdf
-
-It often acts as a bottleneck when we use such libraries with AGPL license for commercial usage.Therefore, this service can 
-be used to provide the benefits of converting HTML to PDF files via API.
-
+This serves as a microservice implementation that uses the iText html2pdf library (https://mvnrepository.com/artifact/com.itextpdf/html2pdf
+) to receive a rest API call with the HTML payload, and responds with the converted PDF
 
 # Getting Started
 
