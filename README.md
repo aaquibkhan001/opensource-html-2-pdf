@@ -12,6 +12,7 @@ be used to provide the benefits of converting HTML to PDF files via API.
 
 
 ### 1. Installation process
+
  i. Clone this repository
  ii. `mvn clean install`
  iii. Execute the jar generated
@@ -61,4 +62,11 @@ Response:
 
 ```
 
-# Contribute
+# CONFIGURATIONS
+
+Change the port and contextName as necessary from application.properties
+
+```json
+default port: 9999
+default contextName: opensourceConverter
+```
