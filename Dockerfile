@@ -1,11 +1,8 @@
 ## Image OpenJDK
 FROM openjdk:17
 
-## Add the Jarfile
-ADD target/opensource-html2pdf-1.0.0-SNAPSHOT.jar
+ARG JAR_FILE
 
-## Define Expose
-EXPOSE 9999
+COPY ${JAR_FILE} opensource-html2pdf.jar
 
-## Define Entrypoint
-ENTRYPOINT ["java","-jar","opensource-html2pdf-1.0.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","opensource-html2pdf.jar"]

@@ -65,3 +65,7 @@ Change the port and contextName as necessary from application.properties
 default port: 9999
 default contextName: opensourceConverter
 ```
+
+# Run via Docker
+
+Can call docker build with $JAR_FILE as a parameter
