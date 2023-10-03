@@ -1,6 +1,6 @@
 package io.github.aaquibkhan.conversion;
 
-import io.github.aaquibkhan.model.ConverterModel;
+import io.github.aaquibkhan.model.ConversionRequestModel;
 
 import java.io.UnsupportedEncodingException;
 
@@ -12,5 +12,5 @@ import java.io.UnsupportedEncodingException;
 
 public interface HtmlConversionService {
 
-	String convertHtmlToPdf(ConverterModel converterModel) throws UnsupportedEncodingException;
+	String convertHtmlToPdf(ConversionRequestModel converterModel) throws UnsupportedEncodingException;
 }

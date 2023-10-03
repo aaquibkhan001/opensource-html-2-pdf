@@ -16,5 +16,5 @@ import lombok.Builder;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
-public record ResponseModel(@JsonProperty("pdfContent") String pdfContent) {
+public record ConversionResponseModel(@JsonProperty("pdfContent") String pdfContent) {
 }

@@ -1,12 +1,10 @@
 package io.github.aaquibkhan.conversion;
 
-import io.github.aaquibkhan.model.ConverterModel;
-import io.github.aaquibkhan.model.ResponseModel;
+import io.github.aaquibkhan.model.ConversionRequestModel;
+import io.github.aaquibkhan.model.ConversionResponseModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,19 +32,22 @@ public class HtmlConversionController {
 	}
 
 	@GetMapping("/html2pdf")
-	public ResponseEntity<ResponseModel> convertToPdf(@RequestBody ConverterModel converterModel)
+	public ResponseEntity<ConversionResponseModel> convertToPdf(@RequestBody ConversionRequestModel converterModel)
 			throws UnsupportedEncodingException {
-		long startTime = System.currentTimeMillis();
+		try {
+			long startTime = System.currentTimeMillis();
 
-		htmlConversionService.convertHtmlToPdf(converterModel);
+			String encodedPdfContent = htmlConversionService.convertHtmlToPdf(converterModel);
+			ConversionResponseModel responseModel = ConversionResponseModel.builder().pdfContent(encodedPdfContent).build();
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setCacheControl(CacheControl.noCache().cachePrivate().mustRevalidate().getHeaderValue());
+			long endTime = System.currentTimeMillis();
 
-		LOGGER.info("Received request");
-		long endTime = System.currentTimeMillis();
-
-		ResponseModel data = ResponseModel.builder().pdfContent("data").build();
-		return ResponseEntity.ok().header("Custom-Header", "converted").body(data);
+			LOGGER.info("Successfully converted given HTML into PDF. Time_Taken= {} in ms", (endTime - startTime));
+			return ResponseEntity.ok().header("Cache-Control", "no-cache, must-revalidate, private")
+					.body(responseModel);
+		} catch (Exception e) {
+			LOGGER.error("Error occurred during conversion of html to pdf. MSG={}", e.getMessage());
+			return ResponseEntity.internalServerError().body(ConversionResponseModel.builder().pdfContent(null).build());
+		}
 	}
 }

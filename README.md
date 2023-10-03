@@ -43,10 +43,13 @@ Request:
 ```json
 
 {
-  "pdfFileName":"something",
+  "pdfFileName":"something", --> optional.
   "htmlContent":"ljljlkj" --> base64 enconded string
 }
-
+```
+Ex:         
+```java
+String encodedHtml = Base64.getEncoder().encodeToString(htmlContent.getBytes());
 ```
 
 Response: 
